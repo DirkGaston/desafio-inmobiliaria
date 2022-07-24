@@ -4,19 +4,29 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Inmobiliaria Darkwoods</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="assets/css/estilos.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap"
+      rel="stylesheet"
+    />
   </head>
-
   <body>
     <nav>
       <section>
+        <h1 class="title">Inmobiliaria Darkwoods</h1>
+        <h3 class="subtitle">
+          ¡Oh vosotros los que entráis, abandonad toda esperanza!
+        </h3>
+
         <div>
           <p>Cantidad de cuartos:</p>
           <input
@@ -29,7 +39,7 @@
         <div>
           <span>Metros cuadrados </span>
           <div class="d-flex">
-            <div class="me-4">
+            <div class="me-4 mt-4">
               <p>desde:</p>
               <input
                 min="0"
@@ -38,7 +48,7 @@
                 type="number"
               />
             </div>
-            <div>
+            <div class="mt-4">
               <p>hasta:</p>
               <input
                 min="0"
@@ -51,33 +61,19 @@
         </div>
       </section>
 
-      <button class="btn btn-warning" id="filterBtn">Buscar</button>
+      <button class="btn btn-warning mt-4" id="filterBtn">Buscar</button>
     </nav>
 
     <section id="Propiedades">
       <h4 class="py-3 counter">Total: <span id="totalProperties">0</span></h4>
 
-      <div class="propiedades">
-        <div class="propiedad">
-          <div
-            class="img"
-            style="
-              background-image: url('https://resizer.glanacion.com/resizer/fhK-tSVag_8UGJjPMgWrspslPoU=/768x0/filters:quality(80)/cloudfront-us-east-1.images.arcpublishing.com/lanacionar/CUXVMXQE4JD5XIXX4X3PDZAVMY.jpg');
-            "
-          ></div>
-          <section>
-            <h5>Mansión</h5>
-            <div class="d-flex justify-content-between">
-              <p>Cuartos: 2</p>
-              <p>Metros: 170</p>
-            </div>
-            <p class="my-3">Mansión gigante</p>
-            <button class="btn btn-info">Ver más</button>
-          </section>
+      <div class="properties">
+        <div class="card">
+          <div class="property"></div>
         </div>
       </div>
     </section>
 
-    <script src="assets/js/index.js"></script>
+    <script src="/assets/js/script.js"></script>
   </body>
 </html>

@@ -1,0 +1,191 @@
+@font-face {
+    font-family: "cambridgeregular";
+    src: url("/assets/css/fonts/cambridge-webfont.woff2") format("woff2"),
+      url("/assets/css/fonts/cambridge-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @import url("https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap");
+  * {
+    text-align: center;
+  }
+  
+  body {
+    background-image: url(/assets/img/forestbackground.jpg);
+    color: white;
+    font-family: "MedievalSharp", cursive;
+    display: grid;
+    grid-template-columns: 3fr 10fr;
+    width: 100vw;
+  }
+  
+  nav {
+    padding: 20px 15%;
+    border-right: solid 2px crimson;
+    box-shadow: 0px 0px 25px crimson;
+    height: 100vh;
+  }
+  
+  nav section {
+    justify-content: space-around;
+    width: 80%;
+    margin: auto;
+  }
+  nav div {
+    margin-bottom: 20px;
+  }
+  
+  .title {
+    font-family: cambridgeregular;
+    font-size: 75px;
+    margin-left: -50px;
+    color: crimson;
+    text-shadow: 5px 5px 5px crimson;
+  }
+  
+  .subtitle {
+    font-family: cambridgeregular;
+    font-size: 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    color: crimson;
+    text-shadow: 5px 5px 5px crimson;
+  }
+  
+  /* Propiedades */
+  
+  .properties {
+    padding: 0px 2%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 45px;
+  }
+  .propiedad {
+    margin: auto;
+    background: rgba(255, 255, 255, 0.068);
+    box-shadow: 0px 0px 7px 1px rgba(255, 255, 255, 0.39);
+  }
+  .propiedad .img {
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+  }
+  .propiedad section {
+    padding: 10px 20px;
+  }
+  
+  .propiedad section p {
+    margin: 0px;
+  }
+  
+  @property --rotate {
+    syntax: "<angle>";
+    initial-value: 132deg;
+    inherits: false;
+  }
+  
+  .card {
+    background-image: url(/assets/img/brandarkun.jpg);
+    background-position: center center;
+    background-size: cover;
+    width: var(--card-width);
+    height: var(--card-height);
+    padding: 10px;
+    padding-block: 25px;
+    position: relative;
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    font-size: 1.5em;
+    color: rgb(88 199 250 / 0%);
+    cursor: pointer;
+    font-family: "MedievalSharp", cursive;
+  }
+  
+  .card:hover {
+    color: rgb(220 20 60 / 100%);
+    transition: color 1s;
+  }
+  .card:hover:before,
+  .card:hover:after {
+    animation: none;
+    opacity: 0;
+  }
+  
+  .card::before {
+    content: "";
+    width: 104%;
+    height: 102%;
+    border-radius: 8px;
+    background-image: linear-gradient(var(--rotate), crimson, red 43%, black);
+    position: absolute;
+    z-index: -1;
+    top: -1%;
+    left: -2%;
+    animation: spin 2.5s linear infinite;
+  }
+  
+  .card::after {
+    position: absolute;
+    content: "";
+    top: calc(var(--card-height) / 6);
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    transform: scale(0.9);
+    filter: blur(calc(var(--card-height) / 6));
+    background-image: linear-gradient(var(--rotate), crimson, red 43%, #c01b1bf6);
+    opacity: 1;
+    transition: opacity 0.5s;
+    animation: spin 2.5s linear infinite;
+  }
+  
+  .cardContainer {
+    padding: 10px;
+  }
+  
+  .cardContainer:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: background-color 1s;
+  }
+  
+  .cardContainer:hover:before,
+  .cardContainer:hover:after {
+    animation: none;
+    opacity: 0;
+  }
+  
+  .counter {
+    color: white;
+    font-weight: 700;
+  }
+  
+  @keyframes spin {
+    0% {
+      --rotate: 0deg;
+    }
+    100% {
+      --rotate: 360deg;
+    }
+  }
+  
+  a {
+    color: #212534;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-weight: bold;
+    margin-top: 2rem;
+  }
+  
+  button {
+    background-color: crimson;
+    color: black;
+    border-radius: 10px;
+  }
+  
