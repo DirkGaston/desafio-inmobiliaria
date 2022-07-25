@@ -1,113 +1,121 @@
 const propertiesArray = [
   {
-    nombre: "Brandarkun",
-    descripcion: "Relajante castillo gótico",
+    name: "Brandarkun",
+    description: "Relajante castillo gótico",
     src: "/assets/img/brandarkun.jpg",
-    cuartos: 2,
-    metros: 170,
+    rooms: 2,
+    meters: 170,
   },
   {
-    nombre: "Castle Sol",
-    descripcion: "Lugar de descanso ideal para el guerrero más intrepido",
+    name: "Castle Sol",
+    description: "Lugar de descanso ideal para el guerrero más intrepido",
     src: "/assets/img/castlesol.jpg",
-    cuartos: 2,
-    metros: 130,
+    rooms: 2,
+    meters: 130,
   },
   {
-    nombre: "Castle Dracul",
-    descripcion: "Disfrutará de este castillo... por toda la eternidad",
+    name: "Castle Dracul",
+    description: "Disfrutará de este castillo... por toda la eternidad",
     src: "/assets/img/draculacastle.jpg",
-    cuartos: 1,
-    metros: 80,
+    rooms: 1,
+    meters: 80,
   },
   {
-    nombre: "Leap",
-    descripcion: "La joya de Irlanda",
+    name: "Leap",
+    description: "La joya de Irlanda",
     src: "/assets/img/leap.jpg",
-    cuartos: 1,
-    metros: 6,
+    rooms: 1,
+    meters: 6,
   },
   {
-    nombre: "Minas Morgul",
-    descripcion: "La legendaria Torre de Morgul",
+    name: "Minas Morgul",
+    description: "La legendaria Torre de Morgul",
     src: "/assets/img/minasmorgul.jpg",
-    cuartos: 3,
-    metros: 200,
+    rooms: 3,
+    meters: 200,
   },
   {
-    nombre: "Wyrn Tower",
-    descripcion: "Indescriptible maravilla de la arquitectura",
+    name: "Wyrn Tower",
+    description: "Indescriptible maravilla de la arquitectura",
     src: "/assets/img/wyrntower.jpg",
-    cuartos: 5,
-    metros: 500,
+    rooms: 5,
+    meters: 500,
   },
   {
-    nombre: "Xasthburg",
-    descripcion:
+    name: "Xasthburg",
+    description:
       "Posiblemente el edificio con más almas en pena jamás construido",
     src: "/assets/img/xasthburg.jpg",
-    cuartos: 3,
-    metros: 900,
+    rooms: 3,
+    meters: 900,
   },
 ];
 
-const minMeters = document.querySelector("#minMeters");
-const maxMeters = document.querySelector("#maxMeters");
-const numRooms = document.querySelector("#numRooms");
-
+const showData = document.querySelector(".properties");
 const filterBtn = document.querySelector("#filterBtn");
+const counter = document.querySelector("#totalProperties");
 
-const properties = document.querySelector(".properties");
-const totalProperties = document.querySelector("#totalProperties");
+let htmlCode = "";
 
-let htmlCode = ``;
-let counter = 0;
-
-function template(a = true, b = true, c = true) {
-  let counter = 0;
-  let htmlCode = "";
-
-  propertiesArray.forEach(function (singlePropertyObject) {
-    if (
-      (a == true && b == true && c == true) ||
-      (singlePropertyObject.metros >= a &&
-        singlePropertyObject.metros <= b &&
-        singlePropertyObject.cuartos == c)
-    ) {
-      htmlCode =
-        htmlCode +
-        `
-    <div class="card" style="background-image: url(${singlePropertyObject.src})">
+const template = (property) => {
+  console.log(property);
+  return `
+    <div class="card" style="background-image: url(${property.src})">
     <div class="cardContainer">
-      <h4><b>${singlePropertyObject.nombre}</b></h4> 
-      <p>Cuartos: ${singlePropertyObject.cuartos}</p> 
-      <p>m2: ${singlePropertyObject.metros}</p> 
-      <p>${singlePropertyObject.descripcion}</p> 
-    
+      <h4><b>${property.name}</b></h4> 
+      <p>Cuartos: ${property.rooms}</p> 
+      <p>m2: ${property.meters}</p> 
+      <p>${property.description}</p> 
     </div>
   </div>`;
-      counter++;
-    }
-  });
+};
 
-  properties.innerHTML = htmlCode;
-  totalProperties.innerHTML = counter;
-}
-
-template();
-
-filterBtn.addEventListener("click", () => {
-  let metersMin = minMeters.value;
-  let metersMax = maxMeters.value;
-  let totalRooms = numRooms.value;
-
-  if (
-    minMeters.value === "" ||
-    maxMeters.value === "" ||
-    numRooms.value === ""
-  ) {
-    alert("Por favor rellene todos los campos");
-  } else {
-    template(metersMin, metersMax, totalRooms);
+const pageLoad = () => {
+  for (const property of propertiesArray) {
+    htmlCode += template(property);
   }
-});
+  showData.innerHTML += htmlCode;
+  counter.innerHTML = propertiesArray.length;
+};
+
+const searchFilter = (minMeters, maxMeters, numRooms) => {
+  htmlCode = "";
+  let searchResultItems = [];
+
+  for (const property of propertiesArray) {
+    if (
+      minMeters <= property.meters &&
+      maxMeters >= property.meters &&
+      property.rooms >= numRooms
+    ) {
+      htmlCode += template(property);
+      searchResultItems.push(property);
+    }
+  }
+
+  if (searchResultItems.length > 0) {
+    showData.innerHTML = htmlCode;
+    counter.innerHTML = searchResultItems.length;
+  } else {
+    showData.innerHTML = `<div class="property"><h2>NO DISPONEMOS DE PROPIEDADES CON ESTAS CARACTERÍSTICAS</h2></div>`;
+    counter.innerHTML = searchResultItems.length;
+  }
+};
+
+const validation = () => {
+  let numRooms = Number(document.querySelector("#numRooms").value);
+  let minMeters = Number(document.querySelector("#minMeters").value);
+  let maxMeters = Number(document.querySelector("#maxMeters").value);
+
+  if (numRooms != "" && minMeters != "" && maxMeters != "") {
+    searchFilter(minMeters, maxMeters, numRooms);
+  } else {
+    alert("¡Debe rellenar todos los campos!");
+  }
+};
+
+filterBtn.addEventListener("click", validation);
+
+window.onload = function () {
+  pageLoad();
+};
